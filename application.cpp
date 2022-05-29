@@ -21,6 +21,12 @@ void Application::Mainloop()
         Operation* op = m_Parser.Parse();
 
         m_Brainfuck.ApplyAll(op);
+        std::cout << '\n';
+        
+        m_Brainfuck.Reset();
+        
+
+        delete op;
 
     } // END MAIN LOOP
 }

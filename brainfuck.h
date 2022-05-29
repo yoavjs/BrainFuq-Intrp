@@ -1,5 +1,7 @@
 #pragma once
 
+#include <conio.h>
+
 #include <iostream>
 #include <string>
 #include <deque>
@@ -12,13 +14,16 @@ public:
 
     Brainfuck();
 
+    void Print();
+
+    void Reset();
+
     void ApplyAll(Operation* &top);
 
 	void ApplyOperation(const Operation& op);
 
 private:
-    std::string inp;
 
-	std::deque<int>::iterator m_It;
-	std::deque<int> m_Mem;
+	std::deque<char>::iterator m_It;
+	std::deque<char> m_Mem;
 };

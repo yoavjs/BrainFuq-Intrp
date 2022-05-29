@@ -15,6 +15,11 @@ Operation::Operation(const OpCode& opCode) {
     m_OpCode = opCode;
 }
 
+Operation::~Operation() {
+    for (auto op : m_Children) delete op;
+    m_Children.clear();
+}
+
 auto Operation::GetIterator() const
 {
 	return m_Children.begin();

@@ -1,16 +1,18 @@
 #include "cmdline.h"
 
 const char* CmdLine::PREFIX = "$$ ";
-const int CmdLine::MAX_CMD_LENGTH = 1 << 16;
+const long long int CmdLine::MAX_CMD_LENGTH = 1 << 8;
 
 
 CmdLine::CmdLine() {}
 
 const char* CmdLine::HandleInput() const {
+    // Clear buffer
+    memset(m_Cmd, 0, CmdLine::MAX_CMD_LENGTH);
+
     std::cout << CmdLine::PREFIX;
+    
+    std::cin.getline(m_Cmd, CmdLine::MAX_CMD_LENGTH);
 
-    char* cmd = new char[CmdLine::MAX_CMD_LENGTH];
-    std::cin.getline(cmd, CmdLine::MAX_CMD_LENGTH);
-
-    return cmd;
+    return m_Cmd;
 }

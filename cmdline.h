@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string.h>
+
 #include <iostream>
 #include <string>
 
@@ -14,5 +16,7 @@ public:
 private:
 
     const static char* PREFIX;
-    const static int MAX_CMD_LENGTH;
+    const static long long int MAX_CMD_LENGTH;
+
+    char* m_Cmd = new char[CmdLine::MAX_CMD_LENGTH];
 };

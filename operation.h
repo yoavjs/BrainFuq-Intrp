@@ -17,6 +17,7 @@ public:
     const static std::map<char, OpCode> ops_map;
 
     Operation(const OpCode& opCode);
+    ~Operation();
 
 	inline OpCode GetOpCode() const { return m_OpCode; }
 

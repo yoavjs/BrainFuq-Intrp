@@ -1,6 +1,21 @@
 #include "brainfuck.h"
 
-Brainfuck::Brainfuck() {}
+Brainfuck::Brainfuck() {
+    m_Mem.push_back(0);
+    m_It = m_Mem.begin();
+}
+
+void Brainfuck::Print() {
+    std::cout << "Brainfuck deque values: ";
+    for (auto i : m_Mem) std::cout << int(i) << ", ";
+    std::cout << '\n';
+}
+
+void Brainfuck::Reset() {
+    m_Mem.clear();
+    m_Mem.push_back(0);
+    m_It = m_Mem.begin();
+}
 
 void Brainfuck::ApplyAll(Operation* &top){
     for (Operation* &op : top->GetChildren()) {
@@ -24,22 +39,23 @@ void Brainfuck::ApplyOperation(const Operation& op)
     {
     case OpCode::OPEN_BRACKET:
         {
-            if ((*m_It) > 0)
-                (*m_It)--;
+            break;
         }
 	case OpCode::RIGHT:
         {
-            if (m_It == m_Mem.end())
+            if ((m_It != m_Mem.end()) && (m_It == --m_Mem.end())){
                 m_Mem.push_back(0);
-            m_It++;
+            }
+            ++m_It;
 
             break;
         }
     case OpCode::LEFT:
         {
-            if (m_It == m_Mem.begin())
+            if (m_It == m_Mem.begin()) {
                 m_Mem.push_front(0);
-            m_It--;
+            }
+            --m_It;
 
             break;
         }
@@ -57,14 +73,14 @@ void Brainfuck::ApplyOperation(const Operation& op)
         }
     case OpCode::DOT:
         {
-            char chr = ((*m_It) & 0xFF);
+            char chr = (*m_It);
             std::cout << chr;
 
             break;
         }
     case OpCode::COMMA:
         {
-            char chr = getchar();
+            char chr = getch();
             (*m_It) = chr;
 
             break;
